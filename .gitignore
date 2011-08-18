@@ -1,0 +1,9 @@
+.bundle
+db/*.sqlite3
+log/*.log
+tmp/
+capybara-*.html
+public/system
+public/javascripts/Specs/Runner/reports/TEST-*
+vendor/gems
+.gem
