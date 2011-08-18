@@ -4,4 +4,4 @@
 require File.expand_path('../config/application', __FILE__)
 require 'rake'
 
-Sociopath::Application.load_tasks
+Sociopathor::Application.load_tasks
