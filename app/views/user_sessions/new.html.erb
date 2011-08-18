@@ -1,0 +1,38 @@
+<%= content_for :javascript do %>
+<script src="/javascripts/Source/Helpers/LoginButtons.js"></script>
+<script src="/javascripts/Source/Pages/UserSessions/New/Controller.js"></script>
+<% end %>
+
+<% if @services.length == 1 %>
+<style>
+body { display: none; }
+</style>
+<% end %>
+
+<div id="user_sessions_new" class="user_sessions">
+  <h1>Login</h1>
+
+  <div id="signup">
+    <%= form_for @user_session, :url => authenticate_path, :html => { :method => :post } do |f| %>
+      <%= oauth_login_hidden_input %>
+      <% if @user_session.errors.any? %>
+        <div id="error_explanation">
+          <ul>
+          <% @user_session.errors.full_messages.each do |msg| %> 
+            <li><%= msg %></li>
+          <% end %> 
+          </ul>
+        </div>
+      <% end %> 
+
+      <span class="info"><strong>Je souhaite me connecter avec</strong></span>
+      <ul>
+        <% @services.each do |service| %>
+        <li class="<%= service %>"><%= radio_button_tag :oauth_provider, service %> <label for="oauth_provider_<%= service %>"><%= service.capitalize %></label></li>
+        <% end %>
+        <li class="submit"><%= submit_tag 'Login' %></li>
+      </ul>
+    <% end %>
+  </div>
+
+</div><!-- #user_sessions_new -->
