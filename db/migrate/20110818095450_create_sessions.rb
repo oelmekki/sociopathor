@@ -6,7 +6,7 @@ class CreateSessions < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index :session_id, :updated_at
+    add_index :sessions, :session_id
   end
 
   def self.down

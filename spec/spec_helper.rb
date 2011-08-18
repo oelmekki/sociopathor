@@ -25,3 +25,16 @@ RSpec.configure do |config|
   # instead of true.
   config.use_transactional_fixtures = true
 end
+
+def reset_env
+  User.delete_all
+
+  @current_user = User.create!(
+    :login => 'test_user', 
+    :email => 'test@example.com'
+  );
+
+  @mock_session = mock( 'UserSession' )
+  UserSession.stub!( :find ).and_return( @mock_session )
+  @mock_session.stub!( :record ).and_return( @current_user )
+end

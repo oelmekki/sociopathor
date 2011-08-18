@@ -19,7 +19,7 @@ class CreateUsers < ActiveRecord::Migration
       t.integer   :active_token_id
     end
 
-    add_index :active_token_id
+    add_index :users, :active_token_id
   end
 
   def self.down
