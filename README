@@ -31,3 +31,19 @@ Two files will be installed :
 
 Enter your api key / secrets in both.
 
+
+# Extend
+
+You'll probably want to extend the base classes. Sociopathor being a rails engine, you
+can't just monkey patch them : if an app/models/user.rb file exists in your app, the
+engine's one won't be loaded.
+
+That's ok, this mechanism let you override views. Sociopathor generator installs a
+bunch of files for you to extend its base class :
+  app/models/local_user.rb
+  app/models/local_user_session.rb
+  app/controllers/local_users_controller.rb
+  app/controllers/local_user_sessions_controller.rb
+
+If you don't need them, you can safely erase them.
+

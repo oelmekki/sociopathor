@@ -5,7 +5,7 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sociopathor}
-  s.version = "0.1.3"
+  s.version = "0.1.4"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Olivier El Mekki"]
@@ -18,7 +18,6 @@ Gem::Specification.new do |s|
     "app/controllers/user_sessions_controller.rb",
     "app/controllers/users_controller.rb",
     "app/helpers/application_helper.rb",
-    "app/models/profile.rb",
     "app/models/user.rb",
     "app/models/user_session.rb",
     "app/views/layouts/application.html.erb",
@@ -32,6 +31,10 @@ Gem::Specification.new do |s|
     "lib/rails/generators/sociopathor/templates/create_access_tokens.rb",
     "lib/rails/generators/sociopathor/templates/create_sessions.rb",
     "lib/rails/generators/sociopathor/templates/create_users.rb",
+    "lib/rails/generators/sociopathor/templates/local_user.rb",
+    "lib/rails/generators/sociopathor/templates/local_user_session.rb",
+    "lib/rails/generators/sociopathor/templates/local_user_sessions_controller.rb",
+    "lib/rails/generators/sociopathor/templates/local_users_controller.rb",
     "lib/sociopathor.rb"
   ]
   s.require_paths = ["lib"]

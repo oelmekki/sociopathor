@@ -28,4 +28,14 @@ class UserSessionsController < ApplicationController
     flash[:notice] = "Logout successful!"
     redirect_to root_path
   end
+
+  begin
+    extend LocalUserSessionsController::ClassMethods
+  rescue
+  end
+
+  begin
+    include LocalUserSessionsController::InstanceMethods
+  rescue
+  end
 end

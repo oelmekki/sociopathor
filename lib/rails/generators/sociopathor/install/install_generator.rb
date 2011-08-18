@@ -27,6 +27,13 @@ module Sociopathor
         copy_file 'authlogic.yml', 'config/authlogic.yml'
         copy_file 'authlogic_connect_config.rb', 'config/initializers/authlogic_connect_config.rb'
       end
+
+      def copy_local_extension_files
+        copy_file 'local_user.rb', 'app/models/local_user.rb'
+        copy_file 'local_user_session.rb', 'app/models/local_user_session.rb'
+        copy_file 'local_users_controller.rb', 'app/controllers/local_users_controller.rb'
+        copy_file 'local_user_sessions_controller.rb', 'app/controllers/local_user_sessions_controller.rb'
+      end
     end
   end
 end

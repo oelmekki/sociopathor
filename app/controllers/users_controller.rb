@@ -24,5 +24,15 @@ class UsersController < ApplicationController
     service = params[ :service ]
     render :json => { :service => service, :authenticated => !! current_user.authenticated_with?( service.to_sym ) }
   end
+
+  begin
+    extend LocalUsersController::ClassMethods
+  rescue
+  end
+
+  begin
+    include LocalUsersController::InstanceMethods
+  rescue
+  end
 end
 
