@@ -7,3 +7,4 @@ public/system
 public/javascripts/Specs/Runner/reports/TEST-*
 vendor/gems
 .gem
+pkg
