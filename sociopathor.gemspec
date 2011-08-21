@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sociopathor}
-  s.version = "0.1.4"
+  s.version = "0.1.6"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Olivier El Mekki"]
-  s.date = %q{2011-08-18}
+  s.date = %q{2011-08-21}
   s.email = %q{oelmekki@gmail.com}
   s.extra_rdoc_files = [
     "README"
@@ -51,6 +51,7 @@ Gem::Specification.new do |s|
       s.add_runtime_dependency(%q<authlogic>, [">= 0"])
       s.add_runtime_dependency(%q<authlogic-connect>, [">= 0"])
       s.add_development_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_runtime_dependency(%q<oauth2>, ["= 0.4.1"])
       s.add_runtime_dependency(%q<authlogic>, [">= 0"])
       s.add_runtime_dependency(%q<authlogic-connect>, [">= 0"])
     else
@@ -59,6 +60,7 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<authlogic>, [">= 0"])
       s.add_dependency(%q<authlogic-connect>, [">= 0"])
       s.add_dependency(%q<rspec-rails>, [">= 0"])
+      s.add_dependency(%q<oauth2>, ["= 0.4.1"])
       s.add_dependency(%q<authlogic>, [">= 0"])
       s.add_dependency(%q<authlogic-connect>, [">= 0"])
     end
@@ -68,6 +70,7 @@ Gem::Specification.new do |s|
     s.add_dependency(%q<authlogic>, [">= 0"])
     s.add_dependency(%q<authlogic-connect>, [">= 0"])
     s.add_dependency(%q<rspec-rails>, [">= 0"])
+    s.add_dependency(%q<oauth2>, ["= 0.4.1"])
     s.add_dependency(%q<authlogic>, [">= 0"])
     s.add_dependency(%q<authlogic-connect>, [">= 0"])
   end

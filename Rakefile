@@ -6,6 +6,7 @@ begin
     gem.email = "oelmekki@gmail.com"
     gem.authors = ["Olivier El Mekki"]
     gem.files = Dir["{lib}/**/*", "{app}/**/*", "{public}/**/*", "{config}/**/*"]
+    gem.add_dependency 'oauth2', [ "0.4.1" ]
     gem.add_dependency 'authlogic'
     gem.add_dependency 'authlogic-connect'
   end
