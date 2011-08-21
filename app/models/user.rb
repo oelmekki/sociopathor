@@ -46,31 +46,37 @@ class User < ActiveRecord::Base
   
   def profile
     unless @profile
-      @profile = if default_auth_service == 'facebook' and facebook
-        {
-          :id     => facebook["id"],
-          :name   => facebook["name"],
-          :avatar  => "https://graph.facebook.com/#{facebook["id"]}/picture",
-          :link   => facebook["link"],
-          :title  => "Facebook"
-        }
-      elsif default_auth_service == 'twitter' and twitter
-        {
-          :id     => twitter["id"],
-          :name   => twitter["name"],
-          :avatar  => twitter["profile_image_url"],
-          :link   => "http://twitter.com/#{twitter["screen_name"]}",
-          :title  => "Twitter"
-        }
-      else
-        {
-          :id     => "unknown",
-          :name   => "User",
-          :avatar  => "/images/icons/google.png",
-          :link   => "/images/icons/google.png",
-          :title  => "Google"
-        }
+
+      if ( last_cached_at || Time.new('0') ) < 1.week.ago
+        if default_auth_service == 'facebook'
+          facebook_id = facebook[ 'id' ]
+          update_attributes!({ 
+            :social_id          => facebook_id,
+            :screen_name        => facebook[ 'name' ],
+            :avatar_url         => "https://graph.facebook.com/#{facebook_id}/picture",
+            :social_profile_url => facebook[ 'link' ],
+            :last_cached_at     => Time.now
+          })
+        else
+          twitter_screen_name = twitter[ 'screen_name' ]
+
+          update_attributes!({ 
+            :social_id          => twitter[ 'id' ],
+            :screen_name        => '@' + twitter_screen_name,
+            :avatar_url         => twitter[ 'profile_image_url' ],
+            :social_profile_url => "http://twitter.com/#{twitter_screen_name}",
+            :last_cached_at     => Time.now
+          })
+        end
       end
+
+      @profile = {
+        :id       => social_id,
+        :name     => screen_name,
+        :avatar   => avatar_url,
+        :link     => social_profile_url,
+        :title    => default_auth_service
+      }
     end
 
     @profile
