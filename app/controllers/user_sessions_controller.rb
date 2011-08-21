@@ -16,7 +16,7 @@ class UserSessionsController < ApplicationController
     @user_session.save do |result|
       if result
         current_user.save
-        redirect_to new_poll_url
+        redirect_back_or_default root_path, :notice => 'Account updated'
       else
         render :action => :new
       end

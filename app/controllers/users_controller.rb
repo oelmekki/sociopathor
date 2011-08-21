@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @services = services.include?( params[ :service ] ) ? [ params[ :service ] ] : services
     @user.update_attributes params[ :user ] do |result|
       if result
-        redirect_to new_poll_path, :notice => 'Account updated'
+        redirect_back_or_default root_path, :notice => 'Account updated'
       else
         render :action => edit
       end

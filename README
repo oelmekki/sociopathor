@@ -32,6 +32,31 @@ Two files will be installed :
 Enter your api key / secrets in both.
 
 
+# Use
+
+Sociopathor gives you two ApplicationController methods to use with filters :
+- require_user : redirect to login page if user isn't logged in
+- require_no_user : redirect to root page and inform user she should not be logged in
+
+He also gives you three helpers methods :
+- store_location : store the current url in order to redirect back to it then
+- redirect_back_or_default : redirect to stored location or to default given as parameter
+- current_user : retrieve the current user instance (or nil)
+
+The User model give you following methods :
+- twitter_restful : proxy to twitter api ( or nil if user is not logged in with twitter )
+- facebook_restful : proxy to facebook api ( or nil if user is not logged in with facebook )
+- profile : a hash containing profile for default (first connected) third party service :
+  * id : the user id at third party
+  * name : the name of user at third party
+  * avatar : the user avatar
+  * link : the user profile url at third party
+
+Finally, he also gives you the following routes (not sot antisocial, after all):
+- /login
+- /logout
+
+
 # Extend
 
 You'll probably want to extend the base classes. Sociopathor being a rails engine, you

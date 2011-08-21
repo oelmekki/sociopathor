@@ -3,14 +3,6 @@ require 'authlogic-connect'
 
 module Sociopathor
   module Helpers
-    def login_required
-      if current_user.nil?
-        redirect_to new_user_url
-        true
-      end
-      false
-    end
-
     def current_user_session
       @current_user_session ||= UserSession.find
     end
@@ -20,7 +12,8 @@ module Sociopathor
     end
     
     def require_user
-      unless current_user
+    unless current_user
+      store_location
         flash[:notice] = "You must be logged in to access this page"
         redirect_to new_user_session_url
         return false
@@ -29,10 +22,20 @@ module Sociopathor
 
     def require_no_user
       if current_user
+        store_location
         flash[:notice] = "You must be logged out to access this page"
         redirect_to root_path
         return false
       end
+    end
+
+    def store_location
+      session[ :return_to ] = request.full_path
+    end
+
+    def redirect_back_or_default( default, options = {} )
+      redirect_to( session[ :return_to ] || default, options )
+      session[ :return_to ] = nil
     end
   end
 
