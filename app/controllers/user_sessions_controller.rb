@@ -16,7 +16,7 @@ class UserSessionsController < ApplicationController
     @user_session.save do |result|
       if result
         current_user.save
-        redirect_back_or_default root_path, :notice => 'Account updated'
+        redirect_back_or_default default_return_path, :notice => 'Account updated'
       else
         render :action => :new
       end
@@ -27,6 +27,12 @@ class UserSessionsController < ApplicationController
     current_user_session.destroy
     flash[:notice] = "Logout successful!"
     redirect_to root_path
+  end
+
+  protected
+  
+  def default_return_path
+    root_path
   end
 
   begin

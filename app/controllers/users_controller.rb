@@ -13,7 +13,7 @@ class UsersController < ApplicationController
     @services = services.include?( params[ :service ] ) ? [ params[ :service ] ] : services
     @user.update_attributes params[ :user ] do |result|
       if result
-        redirect_back_or_default root_path, :notice => 'Account updated'
+        redirect_back_or_default default_return_path, :notice => 'Account updated'
       else
         render :action => edit
       end
@@ -23,6 +23,12 @@ class UsersController < ApplicationController
   def check_auth
     service = params[ :service ]
     render :json => { :service => service, :authenticated => !! current_user.authenticated_with?( service.to_sym ) }
+  end
+
+  protected
+
+  def default_return_path
+    root_path
   end
 
   begin
