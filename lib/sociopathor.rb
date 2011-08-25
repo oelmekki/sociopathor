@@ -12,10 +12,16 @@ module Sociopathor
     end
     
     def require_user
-    unless current_user
-      store_location
-        flash[:notice] = "You must be logged in to access this page"
-        redirect_to new_user_session_url
+      unless current_user
+        store_location
+
+        msg = "You must be logged in to access this page"
+
+        respond_to do |format|
+          format.html { redirect_to new_user_session_path, :notice => msg }
+          format.json { render :json => { :redirect => new_user_session_path, :message => msg, :type => 'require_user' } }
+        end
+
         return false
       end
     end
@@ -23,8 +29,13 @@ module Sociopathor
     def require_no_user
       if current_user
         store_location
-        flash[:notice] = "You must be logged out to access this page"
-        redirect_to root_path
+        msg = "You must be logged out to access this page";
+
+        respond_to do |format|
+          format.html { redirect_to root_path, :notice => msg }
+          format.json { render :json => { :redirect => root_path, :message => msg, :type => 'require_no_user' } }
+        end
+
         return false
       end
     end
