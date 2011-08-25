@@ -5,12 +5,15 @@ class UsersController < ApplicationController
     @user = current_user
     services = %w(twitter facebook)
     @services = services.include?( params[ :service ] ) ? [ params[ :service ] ] : services
+    @return_to = params[ :return_to ]
   end
   
   def update
     @user = current_user
     services = %w(twitter facebook)
     @services = services.include?( params[ :service ] ) ? [ params[ :service ] ] : services
+    @return_to = params[ :return_to ]
+
     @user.update_attributes params[ :user ] do |result|
       if result
         begin

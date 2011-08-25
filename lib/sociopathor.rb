@@ -59,3 +59,14 @@ module Sociopathor
     end
   end
 end
+
+
+module AuthlogicConnect::Common::Variables
+  def auth_callback_url( options = {} )
+    if auth_controller.params[ :return_to ]
+      options[ :return_to ] = auth_controller.params[ :return_to ]
+    end
+
+    auth_controller.url_for({:controller => auth_controller.controller_name, :action => auth_controller.action_name}.merge(options))
+  end
+end

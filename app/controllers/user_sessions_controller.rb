@@ -6,12 +6,15 @@ class UserSessionsController < ApplicationController
     @user_session = UserSession.new
     services = %w(twitter facebook)
     @services = services.include?( params[ :service ] ) ? [ params[ :service ] ] : services
+    @return_to = params[ :return_to ]
   end
   
   def create
     @user_session = UserSession.new(params[:user_session])
     services = %w(twitter facebook)
     @services = services.include?( params[ :service ] ) ? [ params[ :service ] ] : services
+    session[ :return_to ] = params[ :return_to ] if params[ :return_to ]
+    @return_to = params[ :return_to ]
 
     @user_session.save do |result|
       if result

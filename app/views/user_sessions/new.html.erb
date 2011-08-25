@@ -13,7 +13,7 @@ body { display: none; }
   <h1>Login</h1>
 
   <div id="signup">
-    <%= form_for @user_session, :url => authenticate_path, :html => { :method => :post } do |f| %>
+    <%= form_for @user_session, :url => authenticate_path( :return_to => @return_to ), :html => { :method => :post } do |f| %>
       <%= oauth_login_hidden_input %>
       <% if @user_session.errors.any? %>
         <div id="error_explanation">
