@@ -5,11 +5,11 @@
 
 Gem::Specification.new do |s|
   s.name = %q{sociopathor}
-  s.version = "0.1.11"
+  s.version = "0.1.12"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
-  s.authors = ["Olivier El Mekki"]
-  s.date = %q{2011-08-25}
+  s.authors = [%q{Olivier El Mekki}]
+  s.date = %q{2011-08-31}
   s.email = %q{oelmekki@gmail.com}
   s.extra_rdoc_files = [
     "README"
@@ -37,39 +37,23 @@ Gem::Specification.new do |s|
     "lib/rails/generators/sociopathor/templates/local_users_controller.rb",
     "lib/sociopathor.rb"
   ]
-  s.require_paths = ["lib"]
-  s.rubygems_version = %q{1.3.7}
+  s.require_paths = [%q{lib}]
+  s.rubygems_version = %q{1.8.7}
   s.summary = %q{Social features in a rails engine}
 
   if s.respond_to? :specification_version then
-    current_version = Gem::Specification::CURRENT_SPECIFICATION_VERSION
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
-      s.add_runtime_dependency(%q<rails>, ["= 3.0.9"])
-      s.add_runtime_dependency(%q<sqlite3>, [">= 0"])
-      s.add_runtime_dependency(%q<authlogic>, [">= 0"])
-      s.add_runtime_dependency(%q<authlogic-connect>, [">= 0"])
-      s.add_development_dependency(%q<rspec-rails>, [">= 0"])
       s.add_runtime_dependency(%q<oauth2>, ["= 0.4.1"])
       s.add_runtime_dependency(%q<authlogic>, [">= 0"])
       s.add_runtime_dependency(%q<authlogic-connect>, [">= 0"])
     else
-      s.add_dependency(%q<rails>, ["= 3.0.9"])
-      s.add_dependency(%q<sqlite3>, [">= 0"])
-      s.add_dependency(%q<authlogic>, [">= 0"])
-      s.add_dependency(%q<authlogic-connect>, [">= 0"])
-      s.add_dependency(%q<rspec-rails>, [">= 0"])
       s.add_dependency(%q<oauth2>, ["= 0.4.1"])
       s.add_dependency(%q<authlogic>, [">= 0"])
       s.add_dependency(%q<authlogic-connect>, [">= 0"])
     end
   else
-    s.add_dependency(%q<rails>, ["= 3.0.9"])
-    s.add_dependency(%q<sqlite3>, [">= 0"])
-    s.add_dependency(%q<authlogic>, [">= 0"])
-    s.add_dependency(%q<authlogic-connect>, [">= 0"])
-    s.add_dependency(%q<rspec-rails>, [">= 0"])
     s.add_dependency(%q<oauth2>, ["= 0.4.1"])
     s.add_dependency(%q<authlogic>, [">= 0"])
     s.add_dependency(%q<authlogic-connect>, [">= 0"])
