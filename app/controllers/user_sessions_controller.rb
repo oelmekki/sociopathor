@@ -4,9 +4,10 @@ class UserSessionsController < ApplicationController
   
   def new
     @user_session = UserSession.new
-    services = %w(twitter facebook)
-    @services = services.include?( params[ :service ] ) ? [ params[ :service ] ] : services
-    @return_to = params[ :return_to ]
+    services      = %w(twitter facebook)
+    @services     = services.include?( params[ :service ] ) ? [ params[ :service ] ] : services
+    @default_auth = cookies[ :default_auth ]
+    @return_to    = params[ :return_to ]
   end
   
   def create
@@ -26,6 +27,7 @@ class UserSessionsController < ApplicationController
           return_path = root_path
         end
 
+        cookies[ :default_auth ] = current_user.default_auth_service.to_s
         redirect_back_or_default return_path, :notice => 'Account updated'
       else
         render :action => :new
