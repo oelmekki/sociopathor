@@ -10,9 +10,24 @@ module Sociopathor
     def current_user
       @current_user ||= current_user_session && current_user_session.record
     end
+
+    def check_authorized
+      if current_user and ! current_user.profile
+
+        msg = "Wait... Did you removed the app access ? Ok, let's start with a new account."
+
+        current_user.destroy
+        current_user_session.destroy
+
+        respond_to do |format|
+          format.html { redirect_to new_user_session_path, :notice => msg }
+          format.json { render :json => { :redirect => new_user_session_path, :message => msg, :type => 'require_user' } }
+        end
+      end
+    end
     
     def require_user
-      unless current_user
+      if ! current_user
         store_location
 
         msg = "You must be logged in to access this page"
@@ -24,6 +39,7 @@ module Sociopathor
 
         return false
       end
+
     end
 
     def require_no_user
@@ -54,6 +70,7 @@ module Sociopathor
     initializer 'sociopathor.app_controller' do |app|
       ActiveSupport.on_load( :action_controller ) do
         helper_method :current_user_session, :current_user
+        before_filter :check_authorized
         include Helpers
       end
     end

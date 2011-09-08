@@ -4,19 +4,28 @@ class User < ActiveRecord::Base
     config.validate_email_field    = false
     config.validate_login_field    = false
     config.validate_password_field = false
+    config.maintain_sessions       = false
   end
 
   has_many :access_tokens, :dependent => :destroy
   
   def facebook
-    if token = authenticated_with?( :facebook )
-      @facebook ||= JSON.parse token.get( "/me" )
+    begin
+      if token = authenticated_with?( :facebook )
+        @facebook ||= JSON.parse token.get( "/me" )
+      end
+    rescue OAuth2::AccessDenied
+      false
     end
   end
   
   def twitter
-    if token = authenticated_with?( :twitter )
-      @twitter ||= JSON.parse token.get( "/account/verify_credentials.json" ).body
+    begin
+      if token = authenticated_with?( :twitter )
+        @twitter ||= JSON.parse token.get( "/account/verify_credentials.json" ).body
+      end
+    rescue OAuth2::AccessDenied
+      false
     end
   end
 
@@ -47,8 +56,9 @@ class User < ActiveRecord::Base
   def profile
     unless @profile
 
-      if ( last_cached_at || Time.new('0') ) < 1.week.ago
-        if default_auth_service == 'facebook'
+      if ( last_cached_at || Time.new(0) ) < 1.week.ago
+        if authenticated_with? :facebook
+          return false unless facebook # user removed app authorization
           facebook_id = facebook[ 'id' ]
           update_attributes!({ 
             :social_id          => facebook_id,
@@ -59,6 +69,8 @@ class User < ActiveRecord::Base
           })
         else
           twitter_screen_name = twitter[ 'screen_name' ]
+
+          return nil unless twitter_screen_name # user removed app authorization
 
           update_attributes!({ 
             :social_id          => twitter[ 'id' ],
