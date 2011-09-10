@@ -27,7 +27,7 @@ class UserSessionsController < ApplicationController
           return_path = root_path
         end
 
-        cookies[ :default_auth ] = current_user.default_auth_service.to_s
+        cookies.permanent[ :default_auth ] = current_user.default_auth_service.to_s
         redirect_back_or_default return_path, :notice => 'Account updated'
       else
         render :action => :new
