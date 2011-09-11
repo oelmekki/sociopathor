@@ -57,7 +57,7 @@ module Sociopathor
     end
 
     def store_location
-      session[ :return_to ] = request.fullpath
+      session[ :return_to ] = request.fullpath unless request.fullpath =~ /\.json/
     end
 
     def redirect_back_or_default( default, options = {} )
